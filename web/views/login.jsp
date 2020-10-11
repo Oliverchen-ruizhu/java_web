@@ -78,7 +78,10 @@
                 return true;
             }
         }
-
+    function clearAll() {
+        document.getElementById("username").value="";
+        document.getElementById("password").value="";
+    }
     </script>
 </head>
 <body>
@@ -149,7 +152,7 @@
                 <td>
                     <button id="login" type="submit" >提交</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button id="reset" type="reset">重置</button>
+                    <button id="reset"  type="button" onclick="clearAll()">重置</button>
                 </td>
 
             </tr>

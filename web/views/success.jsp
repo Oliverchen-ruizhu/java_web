@@ -13,6 +13,11 @@
 <body>
 <h3>User registration information is：</h3>
 <%
+    //register.jsp发送post请求，reques获取请求数据
+    /**
+     * 客户端可通过 HTML 表单或在网页地址后面提供参数的方法提交数据，
+     * 然后通过 request 对象的相关方法来获取这些数据。
+     */
     request.setCharacterEncoding("UTF-8");
     String [] strusertype = request.getParameterValues("usertype");
     out.print("The type of user:        ");
