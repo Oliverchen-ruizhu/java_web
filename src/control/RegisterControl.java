@@ -1,17 +1,29 @@
 package control;
 
+import java.io.Serializable;
+
 /**
  * @version 0.1
  * @Author: oliver chen
- * @Description:
+ * @Description: java Bean
  * @Date:Create：in 2020/10/12 16:08
  * @Modified By：
  */
-public class RegisterControl {
+public class RegisterControl implements Serializable {
+    private String [] usertype;
     private String username;
+    private String pwd1;
     private String phone_number;
     private String email_address;
     private String working_address;
+
+    public void setUsertype(String[] usertype) {
+        this.usertype = usertype;
+    }
+
+    public String[] getUsertype() {
+        return usertype;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -21,6 +33,13 @@ public class RegisterControl {
         return username;
     }
 
+    public void setPwd1(String pwd1) {
+        this.pwd1 = pwd1;
+    }
+
+    public String getPwd1() {
+        return pwd1;
+    }
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;

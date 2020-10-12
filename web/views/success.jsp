@@ -12,6 +12,7 @@
 </head>
 <body>
 <h3>User registration information is：</h3>
+<%--
 <%
     //register.jsp发送post请求，reques获取请求数据
     /**
@@ -30,16 +31,23 @@
     String stremail = request.getParameter("email_address");
     String strwaddress = request.getParameter("working_address");
 %>
+--%>
+<%
+    request.setCharacterEncoding("UTF-8");//编码格式
+%>
+<jsp:useBean id="userinfo" class="control.RegisterControl" scope="session"></jsp:useBean><%--id为实例化对象名--%>
+<jsp:setProperty property="*" name="userinfo"/>
+
 <br>
-<%out.print("The name of user:      "+strusername);%>
+The name of user:<jsp:getProperty property="username" name="userinfo"/>
 <br>
-<%out.print("The password of user:      "+strpassword);%>
+The password of user:<jsp:getProperty property="pwd1" name="userinfo"/>
 <br>
-<%out.print("The phone number of user:      "+strphone);%>
+The phone number of user:<jsp:getProperty property="phone_number" name="userinfo"/>
 <br>
-<%out.print("The Email of user:     "+stremail);%>
+The Email of user:<jsp:getProperty property="email_address" name="userinfo"/>
 <br>
-<%out.print("The user’s work address:   "+strwaddress);%>
+The user’s work address:<jsp:getProperty property="working_address" name="userinfo"/>
 <br>
 </body>
 </html>
