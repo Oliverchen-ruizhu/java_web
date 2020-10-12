@@ -153,6 +153,7 @@
                     <button id="login" type="submit" >提交</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button id="reset"  type="button" onclick="clearAll()">重置</button>
+
                 </td>
 
             </tr>
