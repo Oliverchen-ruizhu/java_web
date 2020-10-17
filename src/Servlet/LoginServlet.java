@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * @version 0.1
  * @Author: oliver chen
- * @Description: Servlet登录方法
+ * @Description: Servlet设置
  * @Date:Create：in 2020/10/12 17:27
  * @Modified By：
  */
