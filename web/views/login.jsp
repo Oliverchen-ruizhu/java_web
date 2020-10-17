@@ -93,7 +93,7 @@
 </div>
 
 <div>
-    <form id="form_1" action="user_management.jsp" method="post" name="login" onSubmit="return Click()"><!--数据提交-->
+    <form id="form_1" action="/servlet/MyServelt" method="post" name="login" onSubmit="return Click()"><!--数据提交-->
         <!--"action'用户点击提交按钮时，表单被提交到的位置。-->
         <table>
             <tr>

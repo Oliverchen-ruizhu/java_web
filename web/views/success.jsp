@@ -37,7 +37,6 @@
 %>
 <jsp:useBean id="userinfo" class="control.RegisterControl" scope="session"></jsp:useBean><%--id为实例化对象名--%>
 <jsp:setProperty property="*" name="userinfo"/>
-
 <br>
 The name of user:<jsp:getProperty property="username" name="userinfo"/>
 <br>

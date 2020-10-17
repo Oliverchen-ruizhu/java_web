@@ -10,20 +10,11 @@ import java.io.Serializable;
  * @Modified By：
  */
 public class RegisterControl implements Serializable {
-    private String [] usertype;
     private String username;
     private String pwd1;
     private String phone_number;
     private String email_address;
     private String working_address;
-
-    public void setUsertype(String[] usertype) {
-        this.usertype = usertype;
-    }
-
-    public String[] getUsertype() {
-        return usertype;
-    }
 
     public void setUsername(String username) {
         this.username = username;

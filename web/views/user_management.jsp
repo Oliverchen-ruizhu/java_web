@@ -131,7 +131,6 @@
         <span id="autorname">欢迎：
             <%
             session.setAttribute("username",request.getParameter("username"));
-            session.setAttribute("usertype",request.getParameterValues("usertype"));
             Cookie user_name = new Cookie("name",request.getParameter("username"));//创建一个cookie对象保存用户名和密码
             Cookie user_password = new Cookie("pwd",request.getParameter("password"));
             response.addCookie(user_name);//添加
