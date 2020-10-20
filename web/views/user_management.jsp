@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@page import="net.jdbc.test.JDBC" %>
 <html>
 <head>
     <title>user_management page</title>
@@ -133,8 +134,9 @@
             session.setAttribute("username",request.getParameter("username"));
             Cookie user_name = new Cookie("name",request.getParameter("username"));//创建一个cookie对象保存用户名和密码
             Cookie user_password = new Cookie("pwd",request.getParameter("password"));
+            String flag = request.getParameter("remember");
             response.addCookie(user_name);//添加
-            response.addCookie(user_password);
+            if (flag.equals("on")){response.addCookie(user_password);}
             session.setMaxInactiveInterval(60*5);//5分钟后过期
         %><%=session.getAttribute("username")%><a href="login.jsp" id="return">注销</a></span>
         <div id="data"><%=new java.util.Date().toLocaleString()%></div>

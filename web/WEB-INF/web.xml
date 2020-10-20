@@ -5,12 +5,13 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
 <servlet>
-    <servlet-name>MyServelt</servlet-name>
-    <servlet-class>Servlet.LoginServlet</servlet-class>
+    <servlet-name>MyServlet</servlet-name>
+    <servlet-class>web.LoginServlet</servlet-class>
 </servlet>
+    <!--做一个映射-->
     <servlet-mapping>
-        <servlet-name>MyServelt</servlet-name>
-        <url-pattern>/servlet/MyServelt</url-pattern>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/servlet/MyServlet</url-pattern>
     </servlet-mapping>
     <!-- 首页为 index.jsp-->
     <welcome-file-list>

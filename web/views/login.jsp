@@ -93,7 +93,7 @@
 </div>
 
 <div>
-    <form id="form_1" action="/servlet/MyServelt" method="post" name="login" onSubmit="return Click()"><!--数据提交-->
+    <form id="form_1" action="/servlet/MyServlet" method="post" name="login" onSubmit="return Click()"><!--数据提交-->
         <!--"action'用户点击提交按钮时，表单被提交到的位置。-->
         <table>
             <tr>
@@ -130,9 +130,9 @@
                     用户类型:
                 </td>
                 <td>
-                    <input type="radio" id="usertype" name="usertype" value="student">学生
-                    <input type="radio" id="usertype1" name="usertype" value="teacher">老师
-                    <input type="radio" id="usertype2" name="usertype" value="manager">管理员
+                    <input type="radio" id="usertype" name="usertype" value="学生">学生
+                    <input type="radio" id="usertype1" name="usertype" value="老师">老师
+                    <input type="radio" id="usertype2" name="usertype" value="管理员">管理员
                 </td>
             </tr>
             <tr>
@@ -153,9 +153,14 @@
                     <button id="login" type="submit" >提交</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button id="reset"  type="button" onclick="clearAll()">重置</button>
-
                 </td>
 
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="remember" id="remember">记住密码
+                </td>
             </tr>
         </table>
     </form>

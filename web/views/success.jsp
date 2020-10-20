@@ -11,6 +11,8 @@
     <title>success page</title>
 </head>
 <body>
+<center>
+<h1>The user has successfully registered, ongoing jump...</h1>
 <h3>User registration information is：</h3>
 <%--
 <%
@@ -48,5 +50,7 @@ The Email of user:<jsp:getProperty property="email_address" name="userinfo"/>
 <br>
 The user’s work address:<jsp:getProperty property="working_address" name="userinfo"/>
 <br>
+<%response.setHeader("refresh","5;url=/views/login.jsp");%>
 </body>
+</center>
 </html>
