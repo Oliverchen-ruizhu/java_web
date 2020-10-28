@@ -10,11 +10,13 @@ import java.io.Serializable;
  * @Modified By：
  */
 public class RegisterControl implements Serializable {
-    private String username;
-    private String pwd1;
-    private String phone_number;
-    private String email_address;
-    private String working_address;
+    private String username;//用户姓名
+    private String userType;//用户类型
+    private String userAccount;//用户账号
+    private String pwd1;//用户密码
+    private String phone_number;//用户电话
+    private String email_address;//用户电子邮件
+    private String working_address;//用户工作地址
 
     public void setUsername(String username) {
         this.username = username;
@@ -26,6 +28,22 @@ public class RegisterControl implements Serializable {
 
     public void setPwd1(String pwd1) {
         this.pwd1 = pwd1;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public String getUserAccount() {
+        return userAccount;
     }
 
     public String getPwd1() {

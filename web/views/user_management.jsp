@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@page import="net.jdbc.test.JDBC" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="jdk.nashorn.internal.scripts.JD" %>
 <html>
 <head>
     <title>user_management page</title>
@@ -71,13 +74,8 @@
         }
         .student_1{
             background-color: #A4A4A4;
-
-        }
-        .student_2{
-            background-color: #A4A4A4;
-        }
-        .teacher{
-            background-color: #A4A4A4;
+            text-align: center;     /* 水平 */
+            vertical-align: middle; /* 垂直 */
         }
         .list {
             padding: 10px 10px 10px 10px ;
@@ -154,7 +152,7 @@
         </div>
         <table border="5" class="list" >
             <tr>
-                <td class="user_name1" >用户名</td>
+                <td class="user_name1" >用户ID</td>
                 <td class="name1" >姓名</td>
                 <td class="user_type1" >用户类型</td>
                 <td class="user_number">手机号</td>
@@ -162,34 +160,28 @@
                 <td class="user_postion">所在单位</td>
                 <td class="user_check">操作</td>
             </tr>
+            <%
+                JDBC jdbc = new JDBC();
+                String sql = "select * from student";
+                ResultSet result = jdbc.result(sql);
+            %>
+
+            <% if (result!=null){
+                while (result.next()){%>
             <tr class="student_1">
-                <td>憨憨</td>
-                <td>李翰</td>
-                <td>学生</td>
-                <td>12724671232</td>
-                <td>12724671232@163.com</td>
-                <td>西安理工大学</td>
+                <td><%out.print(result.getInt("userId"));%></td>
+                <td><%out.print(result.getString("userName"));%></td>
+                <td><%out.print(result.getString("userType"));%></td>
+                <td><%out.print(result.getString("phoneNumber"));%></td>
+                <td><%out.print(result.getString("EmailAddress"));%></td>
+                <td><%out.print(result.getString("workAddress"));%></td>
                 <td><input id="repassword" type="button" onClick="resetpassword();" value="修改密码"></td>
             </tr>
-            <tr class="student_2">
-                <td>瓜瓜</td>
-                <td>张挂</td>
-                <td>学生</td>
-                <td>14143252235</td>
-                <td>14143252235@qq.com</td>
-                <td>西安理工大学</td>
-                <td><input id="repassword1" type="button" onClick="resetpassword();" value="修改密码"></td>
-            </tr>
-            <tr class="teacher">
-                <td>言言</td>
-                <td>严寒</td>
-                <td>老师</td>
-                <td>16213413212</td>
-                <td>16213413212@163.com</td>
-                <td>西安理工大学</td>
-                <td><input id="deletemessage" type="button" onClick="deleteinfo();" value="删除信息"></td>
-            </tr>
-
+           <%}
+            }
+               //关闭结果集、数据库操作对象、数据库连接
+               //jdbc.close();
+           %>
         </table>
     </form>
     <div id="autor">

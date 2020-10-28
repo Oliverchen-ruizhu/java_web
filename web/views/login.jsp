@@ -61,20 +61,12 @@
                 alert("验证码为空");
                 return false;
             }
-            else if(user_str!=="3180911015"){
-                alert("用户名错误请重新输入");
-                return false;
-            }
-            else if(password_str!=="111111"){
-                alert("密码错误请重新输入");
-                return false;
-            }
             else if (check_str!=="uwx6"){
                 alert("验证码错误");
                 return false;
             }
             else{
-                alert("登录成功");
+                alert("提交成功");
                 return true;
             }
         }
@@ -89,7 +81,7 @@
     <pre><a href="register.jsp" style="color: aqua">还没有账号?(点我)</a>                <span id="time"><%=new java.util.Date().toLocaleString()%></span></pre>
 </div>
 <div id="lop_header">
-    <h1><span style="color: #196299">登录</span></h1>
+    <h1><span style="color: #196299" id="loginpage">登录</span></h1>
 </div>
 
 <div>
@@ -114,7 +106,7 @@
                     }
                 %>
                 <td>
-                    <input type="text" value="<%=name%>" name="username" id="username">
+                    <input type="text" value="<%=name%>" name="userAccount" id="userAccount">
                 </td>
             </tr>
             <tr>
@@ -150,7 +142,7 @@
                 <td>
                 </td>
                 <td>
-                    <button id="login" type="submit" >提交</button>
+                    <button id="login" type="submit">提交</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button id="reset"  type="button" onclick="clearAll()">重置</button>
                 </td>
@@ -159,7 +151,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="checkbox" name="remember" id="remember">记住密码
+                    <input type="checkbox" name="remember" id="remember" >记住密码
                 </td>
             </tr>
         </table>

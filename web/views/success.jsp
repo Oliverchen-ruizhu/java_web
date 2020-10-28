@@ -42,6 +42,8 @@
 <br>
 The name of user:<jsp:getProperty property="username" name="userinfo"/>
 <br>
+The Account of user:<jsp:getProperty property="userAccount" name="userinfo"/>
+<br>
 The password of user:<jsp:getProperty property="pwd1" name="userinfo"/>
 <br>
 The phone number of user:<jsp:getProperty property="phone_number" name="userinfo"/>
