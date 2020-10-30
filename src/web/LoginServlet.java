@@ -84,6 +84,15 @@ public class LoginServlet extends HttpServlet {
                         }
                     }
                     if(failStr==null) {
+                        String username = null;
+                        for (Map map1:re){
+                            for (Object k : map1.keySet())
+                            {
+                                if(k.equals("user_name")){
+                                    username= (String) map1.get(k);
+                                }
+                            }
+                        }
                         out.println("<HTML>");
                         out.println("<HEAD>");
                         out.println("<TITLE>Servlet实例</TITLE>");
@@ -92,7 +101,7 @@ public class LoginServlet extends HttpServlet {
                         out.println("<BODY>");
                         out.println("<CENTER>");
                         out.println("<H1>欢迎用户（" + usertype + "）:");
-                        out.println(user + "</H1>");
+                        out.println(username + "</H1>");
                         out.println("<H3>页面正在跳转</H3>");
                         //该跳转方法能使用url进行传值，但request.setAttribute将无法传值，3秒后跳转
                         response.setHeader("refresh", "3;url=/views/user_management.jsp?username=" + user + "&password=" + pwd + "&remember=" + remember_pwd);

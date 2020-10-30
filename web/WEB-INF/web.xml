@@ -8,10 +8,26 @@
     <servlet-name>MyServlet</servlet-name>
     <servlet-class>web.LoginServlet</servlet-class>
 </servlet>
+    <servlet>
+        <servlet-name>AlterServlet</servlet-name>
+        <servlet-class>web.AlterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdataServlet</servlet-name>
+        <servlet-class>web.UpdataServlet</servlet-class>
+    </servlet>
     <!--做一个映射-->
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/servlet/MyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlterServlet</servlet-name>
+        <url-pattern>/servlet/AlterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdataServlet</servlet-name>
+        <url-pattern>/servlet/UpdataServlet</url-pattern>
     </servlet-mapping>
     <!-- 首页为 index.jsp-->
     <welcome-file-list>

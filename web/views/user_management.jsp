@@ -10,6 +10,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="jdk.nashorn.internal.scripts.JD" %>
+<%@ page import="sun.invoke.empty.Empty" %>
 <html>
 <head>
     <title>user_management page</title>
@@ -103,7 +104,7 @@
     </style><br>
     <script language="javascript">
         function resetpassword(){
-            alert("确认修改密码？");
+            alert("确认修改信息？");
         }
         function deleteinfo(){
             alert("确认删除信息？");
@@ -129,13 +130,13 @@
 
         <span id="autorname">欢迎：
             <%
-            session.setAttribute("username",request.getParameter("username"));
-            Cookie user_name = new Cookie("name",request.getParameter("username"));//创建一个cookie对象保存用户名和密码
-            Cookie user_password = new Cookie("pwd",request.getParameter("password"));
-            String flag = request.getParameter("remember");
-            response.addCookie(user_name);//添加
-            if (flag.equals("on")){response.addCookie(user_password);}
-            session.setMaxInactiveInterval(60*5);//5分钟后过期
+                session.setAttribute("username",request.getParameter("username"));
+                Cookie user_name = new Cookie("name",request.getParameter("username"));//创建一个cookie对象保存用户名和密码
+                Cookie user_password = new Cookie("pwd",request.getParameter("password"));
+                String flag = request.getParameter("remember");
+                response.addCookie(user_name);//添加
+                if (flag.equals("on")){response.addCookie(user_password);}
+                session.setMaxInactiveInterval(60*5);//5分钟后过期
         %><%=session.getAttribute("username")%><a href="login.jsp" id="return">注销</a></span>
         <div id="data"><%=new java.util.Date().toLocaleString()%></div>
 
@@ -143,12 +144,11 @@
 </div>
 
 <div>
-    <form id="form_1" name="usercontrol" method="post" onSubmit="return Click()">
+    <form id="form_1" name="usercontrol" method="post" action="/servlet/AlterServlet">
         <div id="button_1">
             <input id="inputinfo" type="text" name="operation">
-            <button id="search" type="submit">查找</button>
-            <button id="add" type="submit">增加</button>
-            <button id="delet" type="submit">删除</button>
+            <button id="search" type="button">查找</button>
+            <button id="delet" type="button">删除</button>
         </div>
         <table border="5" class="list" >
             <tr>
@@ -164,6 +164,7 @@
                 JDBC jdbc = new JDBC();
                 String sql = "select * from student";
                 ResultSet result = jdbc.result(sql);
+                int tag = 0;//按钮判断
             %>
 
             <% if (result!=null){
@@ -175,9 +176,10 @@
                 <td><%out.print(result.getString("phoneNumber"));%></td>
                 <td><%out.print(result.getString("EmailAddress"));%></td>
                 <td><%out.print(result.getString("workAddress"));%></td>
-                <td><input id="repassword" type="button" onClick="resetpassword();" value="修改密码"></td>
+                <td><BUTTON id="repassword" type="submit" onClick="resetpassword();" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username"));%>" name="alter">修改信息</BUTTON></td>
             </tr>
-           <%}
+           <%
+                }
             }
                //关闭结果集、数据库操作对象、数据库连接
                //jdbc.close();

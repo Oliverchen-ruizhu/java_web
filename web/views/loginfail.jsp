@@ -27,20 +27,23 @@
     <% if (failInfo!=null){%>
     <h1><%=failInfo%></h1>
     <h2><a href="/views/login.jsp">返回登录页面</a></h2>
-    <%}else {%>
+    <%}else if (request.getAttribute("fail_register")!=null) {%>
     <%
         //判断注册逻辑
-        if (request.getAttribute("fail_register")!=null) {
             String flag = (String) request.getAttribute("fail_register");
             if (flag.equals("当前账号已注册")) {
                 failInfo = "当前账号已注册!!!请检查！！！";
             } else {
                 failInfo = "网络错误!!!请稍后！！！";
             }
-        }
     %>
     <h1><%=failInfo%></h1>
     <h2><a href="/views/register.jsp">返回注册页面</a></h2>
+    <%}else if (request.getAttribute("fail_type")!=null){
+        failInfo = "当前登录对象和操作对象不一致!!!无法修改!!!";
+    %>
+    <h1><%=failInfo%></h1>
+    <h2><a href="/views/login.jsp">返回登录页面</a></h2>
     <%}%>
 </center>
 
