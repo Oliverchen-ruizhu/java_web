@@ -34,11 +34,12 @@ public class AlterServlet extends HttpServlet {
         String userInfo[] = request.getParameter("alter").split("\\|");
         String userAccount = userInfo[0];//被操作对象
         String username = userInfo[1];//修改对象
+        String userType = userInfo[2];//用户类型
         String sql = "select * from student " + "where(userAccount='" + userAccount + "')";
         JDBC jdbc = new JDBC();
         try {
 
-            if (userAccount.equals(username)||request.getAttribute("theUser").equals("2")) {
+            if (userAccount.equals(username)||userType.equals("2")) {
                 ResultSet resultSet = jdbc.result(sql);
                 Map map = jdbc.read(resultSet);
                 request.setAttribute("userInfo", map);

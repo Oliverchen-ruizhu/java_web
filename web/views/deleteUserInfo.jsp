@@ -54,7 +54,7 @@
         <td><%out.print(result.getString("EmailAddress"));%></td>
         <td><%out.print(result.getString("workAddress"));%></td>
         <td>
-            <BUTTON id="repassword" type="submit" onClick="resetpassword()" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username"));%>" name="alter">修改信息</BUTTON>
+            <BUTTON id="repassword" type="submit" onClick="resetpassword()" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username")+"|"+session.getAttribute("theUser"));%>" name="alter">修改信息</BUTTON>
             <%
                 if (session.getAttribute("theUser").equals("2")){
             %>

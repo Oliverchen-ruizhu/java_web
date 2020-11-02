@@ -227,7 +227,7 @@
                 <td><%out.print(result.getString("workAddress"));%></td>
                 <td>
                     <%request.setAttribute("theUser",session.getAttribute("theUser"));%>
-                    <BUTTON id="repassword" type="submit" onClick="resetpassword()" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username"));%>" name="alter">修改信息</BUTTON>
+                    <BUTTON id="repassword" type="submit" onClick="resetpassword()" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username")+"|"+session.getAttribute("theUser"));%>" name="alter">修改信息</BUTTON>
                     <%
                         if (session.getAttribute("theUser").equals("2")){
                     %>
