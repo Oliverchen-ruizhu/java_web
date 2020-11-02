@@ -67,6 +67,8 @@
         }
         .user_check {
             background-color: aqua;
+            text-align: center;     /* 水平 */
+            vertical-align: middle; /* 垂直 */
         }
         .user_number {
             background-color: aqua;
@@ -80,6 +82,11 @@
         }
         .list {
             padding: 10px 10px 10px 10px ;
+        }
+        .search{
+            font-style:oblique;/*倾斜字体*/
+            font-size: 10px;
+            font-family: cursive;/*草书*/
         }
         #autor{
             padding: 30px 0px 10px 0px ;
@@ -96,27 +103,63 @@
             font-size: 15px;
             color: #EB0D3B;
         }
-        #deletemessage{
+        .delete{
             background-color: #A4A4A4;
             font-size: 15px;
             color: #EB0D3B;
         }
-    </style><br>
+    </style>
     <script language="javascript">
         function resetpassword(){
-            alert("确认修改信息？");
+            alert("将修改当前对象信息");
         }
-        function deleteinfo(){
-            alert("确认删除信息？");
+        var XMLHttpReq = false;
+        //创建XMLHttpRequest对象
+        function createXMLHttpRequest() {
+            if(window.XMLHttpRequest) { //主流浏览器
+                XMLHttpReq = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject) { // IE浏览器
+                try {
+                    XMLHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        XMLHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) {}
+                }
+            }
+        }
+        //发送请求函数
+        function sendRequest(url) {
+            createXMLHttpRequest();
+            XMLHttpReq.open("POST", url, true);
+            XMLHttpReq.onreadystatechange = processResponse;//指定响应函数
+            XMLHttpReq.send(null);  // 发送请求
+        }
+        // 处理返回信息函数
+        function processResponse() {
+            if (XMLHttpReq.readyState === 4) { // 判断对象状态
+                if (XMLHttpReq.status === 200) { // 信息已经成功返回，开始处理信息
+                    var result = XMLHttpReq.responseText;
+                    document.getElementById("user_info").innerHTML = result;
+                } else { //页面不正常
+                    window.alert("您所请求的页面有异常!!!");
+                }
+            }
         }
         function Click(){
-            var str = document.getElementById("inputinfo").value;
-            if (str===null||str===undefined||str===""){
-                alert("查找、增加、修改对象输入为空");
-                return false;
-            }else{
-                return true;
+            var str = document.getElementById("input_info").value;
+            if (str==="请输入用户姓名进行搜索"){
+                alert("查找对象输入为空");
+            }else {
+                var url = "/views/searchResult.jsp?userName="+str;
+                sendRequest(url);
             }
+        }
+        function Delete(id) {
+            var userAccount = document.getElementById(id).value;
+            var url = "/views/deleteUserInfo.jsp?user="+userAccount;
+            sendRequest(url);
         }
     </script>
 </head>
@@ -128,15 +171,21 @@
     </tr>
     <div id="header1_child">
 
-        <span id="autorname">欢迎：
+        <span id="autorname">欢迎账户：
             <%
-                session.setAttribute("username",request.getParameter("username"));
-                Cookie user_name = new Cookie("name",request.getParameter("username"));//创建一个cookie对象保存用户名和密码
-                Cookie user_password = new Cookie("pwd",request.getParameter("password"));
-                String flag = request.getParameter("remember");
-                response.addCookie(user_name);//添加
-                if (flag.equals("on")){response.addCookie(user_password);}
-                session.setMaxInactiveInterval(60*5);//5分钟后过期
+                if(request.getParameter("username")!=null) {
+                    session.setAttribute("username", request.getParameter("username"));
+                    session.setAttribute("theUser",request.getParameter("userType"));//当前登录的用户类型
+                    Cookie user_name = new Cookie("name", request.getParameter("username"));//创建一个cookie对象保存用户名和密码
+                    Cookie user_password = new Cookie("pwd", request.getParameter("password"));
+                    session.setAttribute("remember",request.getParameter("remember"));
+                    String flag = (String) session.getAttribute("remember");
+                    response.addCookie(user_name);//添加
+                    if (flag.equals("on")) {
+                        response.addCookie(user_password);
+                    }
+                    session.setMaxInactiveInterval(60 * 5);//5分钟后过期
+                }
         %><%=session.getAttribute("username")%><a href="login.jsp" id="return">注销</a></span>
         <div id="data"><%=new java.util.Date().toLocaleString()%></div>
 
@@ -146,11 +195,11 @@
 <div>
     <form id="form_1" name="usercontrol" method="post" action="/servlet/AlterServlet">
         <div id="button_1">
-            <input id="inputinfo" type="text" name="operation">
-            <button id="search" type="button">查找</button>
-            <button id="delet" type="button">删除</button>
+            <input id="input_info" type="text" name="operation" style="color: #A4A4A4" class="search" value="请输入用户姓名进行搜索" onfocus='if(this.value=="请输入用户姓名进行搜索"){this.value="";}; '
+                   onblur='if(this.value==""){this.value="请输入用户姓名进行搜索";};'>
+            <button id="search" type="button" onclick="Click()">查找</button>
         </div>
-        <table border="5" class="list" >
+        <table border="5" class="list" id="user_info">
             <tr>
                 <td class="user_name1" >用户ID</td>
                 <td class="name1" >姓名</td>
@@ -160,14 +209,14 @@
                 <td class="user_postion">所在单位</td>
                 <td class="user_check">操作</td>
             </tr>
+
             <%
                 JDBC jdbc = new JDBC();
                 String sql = "select * from student";
                 ResultSet result = jdbc.result(sql);
-                int tag = 0;//按钮判断
             %>
-
             <% if (result!=null){
+                int flag=1;
                 while (result.next()){%>
             <tr class="student_1">
                 <td><%out.print(result.getInt("userId"));%></td>
@@ -176,9 +225,17 @@
                 <td><%out.print(result.getString("phoneNumber"));%></td>
                 <td><%out.print(result.getString("EmailAddress"));%></td>
                 <td><%out.print(result.getString("workAddress"));%></td>
-                <td><BUTTON id="repassword" type="submit" onClick="resetpassword();" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username"));%>" name="alter">修改信息</BUTTON></td>
+                <td>
+                    <%request.setAttribute("theUser",session.getAttribute("theUser"));%>
+                    <BUTTON id="repassword" type="submit" onClick="resetpassword()" value="<%out.print(result.getString("userAccount")+"|"+session.getAttribute("username"));%>" name="alter">修改信息</BUTTON>
+                    <%
+                        if (session.getAttribute("theUser").equals("2")){
+                    %>
+                    <button id='<%=flag%>' type="button" value="<%out.print(result.getString("userAccount"));%>" onclick="Delete(id)" class="delete">删除信息</button><%}%>
+                </td>
             </tr>
            <%
+                    flag+=1;
                 }
             }
                //关闭结果集、数据库操作对象、数据库连接

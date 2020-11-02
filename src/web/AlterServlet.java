@@ -37,7 +37,8 @@ public class AlterServlet extends HttpServlet {
         String sql = "select * from student " + "where(userAccount='" + userAccount + "')";
         JDBC jdbc = new JDBC();
         try {
-            if (userAccount.equals(username)) {
+
+            if (userAccount.equals(username)||request.getAttribute("theUser").equals("2")) {
                 ResultSet resultSet = jdbc.result(sql);
                 Map map = jdbc.read(resultSet);
                 request.setAttribute("userInfo", map);

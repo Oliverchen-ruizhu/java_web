@@ -257,6 +257,15 @@
                 }
             }
         }
+        function clearAll() {
+            document.getElementById("username").value="";
+            document.getElementById("pwd1").value="";
+            document.getElementById("pwd2").value="";
+            document.getElementById("phone_number").value="";
+            document.getElementById("email_address").value="";
+            document.getElementById("working_address").value="";
+            document.getElementById("check_number").value="";
+        }
     </script>
 </head>
 <body>
@@ -270,6 +279,7 @@
 </div>
 <div id="header2">
     <span>注册</span>
+    <a id="return" href="/views/login.jsp">返回</a>
     <%}else {%>
     <div id="header1">
         <span id="title1">修改信息</span>
@@ -277,8 +287,9 @@
     </div>
     <div id="header2">
         <span>修改</span>
+        <a id="return" href="/views/user_management.jsp">返回</a>
     <%}%>
-    <a id="return" href="/views/login.jsp" target="_blank">返回</a><%--保护用户信息--%>
+
 </div>
 <div>
     <form id="form_1" method="post" name="setup" target="_blank" <%if (tag==null){%>action="/servlet/MyServlet" onSubmit="return register()"<%}else{ %>action="/servlet/UpdataServlet" onSubmit="return register1()"<%}%>>
@@ -308,6 +319,8 @@
                             registerControl.setWorking_address((String) map.get(key));
                         }else if(key.equals("pass_word")){
                             registerControl.setPwd1((String) map.get(key));
+                        }else if(key.equals("user_account")){
+                            registerControl.setUserAccount((String) map.get(key));
                         }
                     }
                 }
@@ -375,9 +388,9 @@
             <tr><td>
             </td>
                 <td id="button">
-                    <button id="reset" type="reset">重置</button>
+                    <button id="reset" type="button" onclick="clearAll()">重置</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button id="setup" type="submit">提交</button>
+                    <button id="setup" type="submit" <%if (tag!=null){%> name="alter" value="<%=registerControl.getUserAccount()%>"<%}%>>提交</button>
                 </td></tr>
             <tr></tr>
         </table>

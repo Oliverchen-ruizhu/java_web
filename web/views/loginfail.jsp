@@ -15,12 +15,12 @@
     //判断登录逻辑问题
     String failInfo = null;
     if(request.getAttribute("fail_Info")!=null){
-    int tag = (int) request.getAttribute("fail_Info");
-    switch (tag){
-        case 0:failInfo = "密码错误!请检查！！！";break;
-        case 1:failInfo = "用户名错误！请检查！！！";break;
-        case 2:failInfo = "用户类型错误！请检查！！！";break;
-    }
+        int tag = (int) request.getAttribute("fail_Info");
+        switch (tag){
+            case 0:failInfo = "密码错误!请检查！！！";break;
+            case 1:failInfo = "用户名错误！请检查！！！";break;
+            case 2:failInfo = "用户类型错误！请检查！！！";break;
+        }
     }
 %>
 <center>
@@ -43,7 +43,7 @@
         failInfo = "当前登录对象和操作对象不一致!!!无法修改!!!";
     %>
     <h1><%=failInfo%></h1>
-    <h2><a href="/views/login.jsp">返回登录页面</a></h2>
+    <h2><a href="/views/user_management.jsp">重新选择修改对象</a></h2>
     <%}%>
 </center>
 

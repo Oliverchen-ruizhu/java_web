@@ -103,8 +103,14 @@ public class LoginServlet extends HttpServlet {
                         out.println("<H1>欢迎用户（" + usertype + "）:");
                         out.println(username + "</H1>");
                         out.println("<H3>页面正在跳转</H3>");
+                        String userType = "0";
+                        switch (usertype){
+                            case "学生":userType="0";break;
+                            case "老师":userType="1";break;
+                            case "管理员":userType="2";break;
+                        }
                         //该跳转方法能使用url进行传值，但request.setAttribute将无法传值，3秒后跳转
-                        response.setHeader("refresh", "3;url=/views/user_management.jsp?username=" + user + "&password=" + pwd + "&remember=" + remember_pwd);
+                        response.setHeader("refresh", "3;url=/views/user_management.jsp?username=" + user + "&password=" + pwd + "&remember=" + remember_pwd+"&userType="+userType);
                         out.println("</CENTER>");
                         out.println("</BODY>");
                         out.println("</HTML>");

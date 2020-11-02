@@ -71,8 +71,9 @@
             }
         }
     function clearAll() {
-        document.getElementById("username").value="";
+        document.getElementById("userAccount").value="";
         document.getElementById("password").value="";
+        document.getElementById("check").value="";
     }
     </script>
 </head>
