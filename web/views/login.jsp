@@ -42,13 +42,24 @@
             width: 0;
         }
     </style>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <!--<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/lib/jquery-3.3.1.min.js"></script>
+
     <script language="javascript">
 
-        function Click(){
-            var user_str=document.getElementById("username").value;
-            var password_str=document.getElementById("password").value;
+        $("#form_1").submit()(function (){
+            var user_str=$("#userAccount").val();
 
-            var check_str=document.getElementById("check").value;
+            var password_str=$("#password").val();
+
+            var check_str=$("#check").val();
+
             if (user_str===null||user_str===undefined||user_str===""){
                 alert("用户名为空");
                 return false;
@@ -69,12 +80,12 @@
                 alert("提交成功");
                 return true;
             }
-        }
-    function clearAll() {
-        document.getElementById("userAccount").value="";
-        document.getElementById("password").value="";
-        document.getElementById("check").value="";
-    }
+        });
+        $("#reset").click()(function (){
+        $("#userAccount").value="";
+        $("#password").value="";
+        $("#check").value="";
+    });
     </script>
 </head>
 <body>
@@ -85,8 +96,8 @@
     <h1><span style="color: #196299" id="loginpage">登录</span></h1>
 </div>
 
-<div>
-    <form id="form_1" action="/servlet/MyServlet" method="post" name="login" onSubmit="return Click()"><!--数据提交-->
+<div class="container">
+    <form id="form_1" action="/servlet/MyServlet" method="post" name="login" ><!--数据提交-->
         <!--"action'用户点击提交按钮时，表单被提交到的位置。-->
         <table>
             <tr>
@@ -97,6 +108,7 @@
                     String name = new String();
                     String password = new String();
                     Cookie [] mycookie = request.getCookies();
+                    if(mycookie!=null){
                     for (int i=0;i<mycookie.length-1;i++){
                         if (mycookie[i].getName().equals("name")){
                             name = mycookie[i].getValue();
@@ -104,6 +116,7 @@
                             password = mycookie[i].getValue();
                         }
 
+                    }
                     }
                 %>
                 <td>
@@ -145,7 +158,7 @@
                 <td>
                     <button id="login" type="submit">提交</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button id="reset"  type="button" onclick="clearAll()">重置</button>
+                    <button id="reset"  type="button">重置</button>
                 </td>
 
             </tr>

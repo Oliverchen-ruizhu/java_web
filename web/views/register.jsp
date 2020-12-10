@@ -259,6 +259,7 @@
         }
         function clearAll() {
             document.getElementById("username").value="";
+            document.getElementById("userAccount").value="";
             document.getElementById("pwd1").value="";
             document.getElementById("pwd2").value="";
             document.getElementById("phone_number").value="";
